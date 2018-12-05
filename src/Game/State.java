@@ -22,20 +22,14 @@ public class State implements Comparable<State> {
     }
 
     public State getParent() {
+        if (parent == null)
+            return null;
         return parent;
     }
 
     public int getMovesCount() {
         return movesCount;
     }
-
-//    public void setParent(State newParent) {
-//        parent = newParent;
-//    }
-
-//    public void setMovesCount(int moves) {
-//        movesCount = moves;
-//    }
 
     public int getPriorityNumber() {
         return priorityNumber;

@@ -10,19 +10,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
 public class guiInterface extends Application {
-    private final Font normalFont = new Font("Arial", 15);
-    private final Font textFont = new Font("Arial", 15);
+    private final Font normalFont = new Font("Arial", 20);
+    private final Font textFont = new Font("Arial", 55);
     private final int size = Board.boardSize;
     private TextField[] puzzleBlocks = new TextField[size * size];
     private final int windowSize = 800;
     private int step = 0;
     private int allSteps = 0;
-    private ArrayList<int[][]> stepsArray;
+    private ArrayList<int[][]> stepsArray = new ArrayList<>();
     private GridPane grid = new GridPane();
 
     public static void main(String[] args) {
@@ -34,6 +32,7 @@ public class guiInterface extends Application {
         CreateFields(puzzleBlocks);
 
         BorderPane root = new BorderPane();
+        root.getStyleClass().add("everything");
         root.setPrefSize(windowSize, windowSize);
         grid.setAlignment(Pos.CENTER);
         StackPane test = new StackPane();
@@ -42,34 +41,79 @@ public class guiInterface extends Application {
         AddFields(puzzleBlocks);
 
         root.setCenter(grid);
-        HBox buttons = new HBox();
+        HBox bottomButtons = new HBox();
+        HBox topButtons = new HBox();
 
         Button solve = createButton("Solve");
         Button left = createButton("<-");
         Button right = createButton("->");
         Button reset = createButton("Reset");
+        Button generate = createButton("Random");
 
-        SetButtonActions(solve, left, right, reset);
+        SetButtonActions(solve, left, right, reset, generate);
 
-        buttons.setSpacing(30);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.getChildren().add(left);
-        buttons.getChildren().add(solve);
-        buttons.getChildren().add(right);
-        root.setBottom(buttons);
-        root.setTop(reset);
+        bottomButtons.setSpacing(30);
+        topButtons.setSpacing(30);
+        bottomButtons.setAlignment(Pos.CENTER);
+        topButtons.setAlignment(Pos.CENTER);
+
+        bottomButtons.getChildren().add(left);
+        bottomButtons.getChildren().add(solve);
+        bottomButtons.getChildren().add(right);
+
+        topButtons.getChildren().add(reset);
+        topButtons.getChildren().add(generate);
+
+        root.setBottom(bottomButtons);
+        root.setTop(topButtons);
         BorderPane.setAlignment(reset, Pos.TOP_CENTER);
 
         Scene scene = new Scene(root, windowSize, windowSize);
+        scene.getStylesheets().add("Styles/styles.css");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    private void SetButtonActions(Button solve, Button left, Button right, Button reset) {
+    private void SetButtonActions(Button solve, Button left, Button right, Button reset, Button generate) {
         SolveAction(solve);
         ResetAction(reset);
         MoveLeftAction(left);
         MoveRightAction(right);
+        GenerateAction(generate);
+    }
+
+    private void GenerateAction(Button generate) {
+        generate.setOnAction(event -> {
+            Reset();
+            String[] numbers = new String[size * size];
+            String[] temp = new String[size * size];
+            Random rnd = new Random(System.currentTimeMillis());
+            int index = 0;
+
+            while (index != size * size) {
+                String rndNumber = rnd.nextInt(size * size) + "";
+                if (!Arrays.asList(temp).contains(rndNumber)) {
+                    if (rndNumber.equals("0")) {
+                        numbers[index] = "";
+                        temp[index++] = String.valueOf(rndNumber);
+                    }
+                    else {
+                        numbers[index] = String.valueOf(rndNumber);
+                        temp[index++] = String.valueOf(rndNumber);
+                    }
+                }
+            }
+
+            SetValues(numbers);
+        });
+    }
+
+    private void SetValues(String[] numbers) {
+        int index = 0;
+        for (int i = 0; i < size * size; i++) {
+            puzzleBlocks[index].setText(numbers[index++]);
+        }
     }
 
     private void MoveLeftAction(Button left) {
@@ -92,37 +136,55 @@ public class guiInterface extends Application {
 
     private void ResetAction(Button reset) {
         reset.setOnAction(event -> {
-            Stage primaryStage1 = new Stage();
-            step = 0;
-            stepsArray.clear();
-            start(primaryStage1);
+            Reset();
         });
+    }
+
+    private void Reset() {
+        step = 0;
+        if (!stepsArray.isEmpty())
+            stepsArray.clear();
+        ClearGrid();
     }
 
     private void SolveAction(Button solve) {
         solve.setOnAction(event -> {
+            step = 0;
+            stepsArray.clear();
             int[][] start = getValues();
             boolean solvable = CheckIfSolvable(start);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            if (solvable) {
-                Solver solution = new Solver(start);
-                Stack<int[][]> steps = solution.states;
-                stepsArray = new ArrayList<>();
-                while (!steps.empty()) {
-                    stepsArray.add(steps.pop());
+            boolean correctFormat = CheckFormat(start);
+
+            System.out.println(correctFormat);
+
+            if (correctFormat) {
+                if (solvable) {
+                    Solver solution = new Solver(start);
+                    Stack<int[][]> steps = solution.states;
+                    stepsArray = new ArrayList<>();
+                    while (!steps.empty()) {
+                        stepsArray.add(steps.pop());
+                    }
+                    allSteps = stepsArray.size();
+                    DisplayAlert("Least amount of moves", String.valueOf(allSteps - 1));
+                    Display();
                 }
-                allSteps = stepsArray.size();
-                alert.setTitle("Least amount of moves");
-                alert.setHeaderText(String.valueOf(allSteps - 1));
-                alert.showAndWait();
-                Display();
+                else {
+                    DisplayAlert("Error", "This puzzle is unsolvable!");
+                }
             }
             else {
-                alert.setTitle("Error");
-                alert.setHeaderText("This puzzle is unsolvable!");
-                alert.showAndWait();
+                DisplayAlert("Error", "Your grid contains duplicating numbers!");
+                ClearGrid();
             }
         });
+    }
+
+    private void DisplayAlert(String title, String headerText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
     }
 
     private Button createButton(String name) {
@@ -152,18 +214,59 @@ public class guiInterface extends Application {
             temp.setPrefSize(500 / size, 500 / size);
             temp.setAlignment(Pos.CENTER);
             temp.setFont(textFont);
+
+            temp.focusedProperty().addListener((arg0, oldValue, newValue) -> {
+                if (!newValue) {
+                    if (temp.getText().matches("\\d+")) {
+                        int number = Integer.parseInt(temp.getText());
+                        if (number < 1 || number >= size * size) {
+                            temp.setText("");
+                        }
+                    }
+                    else {
+                        temp.setText("");
+                    }
+
+                }
+            });
+
             puzzleBlocks[index++] = temp;
+        }
+    }
+
+    private void ClearGrid() {
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                puzzleBlocks[index++].setText("");
+            }
         }
     }
 
     private boolean CheckIfSolvable(int[][] start) {
         int[] linearArray = CreateArray(start);
+
         int sum = CalculateOffsets(linearArray);
         System.out.println(sum);
 
         if (sum % 2 == 0)
             return true;
         return false;
+    }
+
+    private boolean CheckFormat(int[][] start) {
+        int[] array = CreateArray(start);
+        int index = 0;
+
+        String[] tempArray = new String[size * size];
+        for (int item : array) {
+            String sItem = String.valueOf(item);
+            if (!Arrays.asList(tempArray).contains(sItem))
+                tempArray[index++] = sItem;
+            else
+                return false;
+        }
+        return true;
     }
 
     private int CalculateOffsets(int[] linearArray) {
@@ -181,9 +284,9 @@ public class guiInterface extends Application {
 
     private int[] CreateArray(int[][] start) {
         int index = 0;
-        int[] linearArray = new int[8];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        int[] linearArray = new int[size * size - 1];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 int number = start[i][j];
                 if (number != 0)
                     linearArray[index++] = number;
@@ -198,20 +301,33 @@ public class guiInterface extends Application {
         int index = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                puzzleBlocks[index++].setText(
-                        String.valueOf(currentStep[i][j])
-                );
+                if (currentStep[i][j] == 0) {
+                    puzzleBlocks[index++].setText("");
+                }
+                else {
+                    puzzleBlocks[index++].setText(
+                            String.valueOf(currentStep[i][j])
+                    );
+                }
             }
         }
     }
 
     private int[][] getValues() {
-        int[][] start = new int[3][3];
+        int[][] start = new int[size][size];
         int index = 0;
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                start[i][j] = Integer.parseInt(puzzleBlocks[index++].getText());
+                if (!puzzleBlocks[index].getText().isEmpty()) {
+                    System.out.println(index + ": " + puzzleBlocks[index].getText().isEmpty());
+                    start[i][j] = Integer.parseInt(puzzleBlocks[index++].getText());
+                }
+                else {
+                    start[i][j] = 0;
+                    index++;
+                }
+
             }
         }
 

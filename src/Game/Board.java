@@ -7,7 +7,7 @@ public class Board {
     private Map<Integer, Vector> placement;
     public int[][] boardNumbers;
     private Vector<Integer> blankPos;
-    static public int boardSize = 10;
+    static public int boardSize = 4;
 
     public Board(int[][] tiles) {
         placement = new HashMap<>();
@@ -125,30 +125,6 @@ public class Board {
                     Math.abs(numPos.get(1) - (int)num.get(1));
         }
         return 0;
-    }
-
-    public static void main(String [ ] args) {
-        int[][] a = {
-                {5, 1, 2},
-                {0, 6, 3},
-                {4, 7, 8}
-        };
-
-        int[][] prev = {
-                {0, 1, 2},
-                {5, 6, 3},
-                {4, 7, 8}
-        };
-
-        State prevBoard = new State(new Board(prev), null, 0);
-        Board ab = new Board(a);
-        ab.PrintBoard();
-
-        List<Board> b = ab.neighbors(prevBoard);
-        for (Board item : b) {
-            item.PrintBoard();
-            System.out.println(item.Manhattan());
-        }
     }
 
     private void createDictionary() {

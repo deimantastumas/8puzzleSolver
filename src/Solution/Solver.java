@@ -9,12 +9,19 @@ public class Solver {
     public Stack<int[][]> states;
     private int[][] start;
 
+     //3x3 GOAL
+//        private int[][] goal = {
+//                {1, 2, 3},
+//                {4, 5, 6},
+//                {7, 8, 0},
+//        };
+
+    // 4x4 GOAL
     private int[][] goal = {
-            {1, 2, 3, 4, 5},
-            {6, 7, 8, 9, 10},
-            {11, 12, 13, 14, 15},
-            {16, 17, 18, 19, 20},
-            {21, 22, 23, 24, 0}
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
     };
 
     private Board startBoard;
@@ -26,42 +33,8 @@ public class Solver {
         A_Star(startBoard, endBoard);
     }
 
-    public boolean isSolvable() {
-        return false;
-    }
-
-    public int moves() {
-        return 0;
-    }
-
     public String toString() {
         return " ";
-    }
-
-    public static void main(String [ ] args) {
-//        int[][] start = {
-//                {15, 2, 1, 12},
-//                {8, 5, 6, 11},
-//                {4, 9, 10, 7},
-//                {3, 14, 13, 0}
-//        };
-
-//        int[][] start = {
-//                {14, 0, 8, 12},
-//                {10, 11, 9, 13},
-//                {2, 6, 5, 1},
-//                {3, 7, 4, 15}
-//        };
-
-//        int[][] start = {
-//                {1, 2, 3, 4, 5},
-//                {6, 7, 8, 9, 10},
-//                {11, 12, 13, 14, 15},
-//                {16, 17, 18, 19, 0},
-//                {21, 22, 23, 24, 20}
-//        };
-
-        //new Solver(start);
     }
 
     public void A_Star(Board start, Board goal) {
@@ -73,12 +46,14 @@ public class Solver {
 
         Map<int[][], State> score = new HashMap<>();
         score.put(start.boardNumbers, startStage);
+        State previous;
 
         while (!openSet.isEmpty()) {
             State current  = openSet.poll();
-            System.out.println(current.getBoardPosition().Manhattan());
-
+            current.getBoardPosition().PrintBoard();
             System.out.println();
+            previous = current.getParent();
+
             if (current.equals(goalStage)) {
                 Print(current);
                 break;
@@ -89,9 +64,12 @@ public class Solver {
             for (Board item : neighbors) {
                 State neighbor = new State(item, current, current.getMovesCount() + 1);
 
-                if (!openSet.contains(neighbor)) {
-                    openSet.add(neighbor);
+                if (previous != null) {
+                    if (!previous.equals(neighbor))
+                        openSet.add(neighbor);
                 }
+                else
+                    openSet.add(neighbor);
 
                 if (score.containsKey(neighbor.getBoardPosition().boardNumbers)) {
                     UpdateScore(score, neighbor);
