@@ -10,19 +10,19 @@ public class Solver {
     private int[][] start;
 
      //3x3 GOAL
-//        private int[][] goal = {
-//                {1, 2, 3},
-//                {4, 5, 6},
-//                {7, 8, 0},
-//        };
+        private int[][] goal = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 0},
+        };
 
     // 4x4 GOAL
-    private int[][] goal = {
-            {1, 2, 3, 4},
-            {5, 6, 7, 8},
-            {9, 10, 11, 12},
-            {13, 14, 15, 0}
-    };
+//    private int[][] goal = {
+//            {1, 2, 3, 4},
+//            {5, 6, 7, 8},
+//            {9, 10, 11, 12},
+//            {13, 14, 15, 0}
+//    };
 
     private Board startBoard;
     private Board endBoard = new Board(goal);
@@ -44,14 +44,12 @@ public class Solver {
         State goalStage = new State(goal, null, 0);
         openSet.add(startStage);
 
-        Map<int[][], State> score = new HashMap<>();
-        score.put(start.boardNumbers, startStage);
+        Hashtable<int[][], State> scoreX = new Hashtable<>();
+        scoreX.put(start.boardNumbers, startStage);
         State previous;
 
         while (!openSet.isEmpty()) {
             State current  = openSet.poll();
-            current.getBoardPosition().PrintBoard();
-            System.out.println();
             previous = current.getParent();
 
             if (current.equals(goalStage)) {
@@ -71,13 +69,13 @@ public class Solver {
                 else
                     openSet.add(neighbor);
 
-                if (score.containsKey(neighbor.getBoardPosition().boardNumbers)) {
-                    UpdateScore(score, neighbor);
+                if (scoreX.containsKey(neighbor.getBoardPosition().boardNumbers)) {
+                    UpdateScore(scoreX, neighbor);
                     openSet.remove(neighbor);
                     openSet.add(neighbor);
                 }
                 else {
-                    score.put(neighbor.getBoardPosition().boardNumbers, neighbor);
+                    scoreX.put(neighbor.getBoardPosition().boardNumbers, neighbor);
                 }
             }
         }

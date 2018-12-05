@@ -20,6 +20,7 @@ public class guiInterface extends Application {
     private final int windowSize = 800;
     private int step = 0;
     private int allSteps = 0;
+    private int[] colorPos;
     private ArrayList<int[][]> stepsArray = new ArrayList<>();
     private GridPane grid = new GridPane();
 
@@ -93,6 +94,7 @@ public class guiInterface extends Application {
 
             while (index != size * size) {
                 String rndNumber = rnd.nextInt(size * size) + "";
+                System.out.println(rndNumber);
                 if (!Arrays.asList(temp).contains(rndNumber)) {
                     if (rndNumber.equals("0")) {
                         numbers[index] = "";
@@ -167,6 +169,8 @@ public class guiInterface extends Application {
                     }
                     allSteps = stepsArray.size();
                     DisplayAlert("Least amount of moves", String.valueOf(allSteps - 1));
+                    colorPos = new int[allSteps];
+                    GetColorPos(stepsArray);
                     Display();
                 }
                 else {
@@ -298,9 +302,11 @@ public class guiInterface extends Application {
 
     private void Display() {
         int[][] currentStep = stepsArray.get(step);
+
         int index = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
+                puzzleBlocks[index].setStyle("-fx-text-inner-color: black;");
                 if (currentStep[i][j] == 0) {
                     puzzleBlocks[index++].setText("");
                 }
@@ -311,7 +317,36 @@ public class guiInterface extends Application {
                 }
             }
         }
+
+        if (step != allSteps - 1) {
+            int colorIndex = colorPos[step];
+            puzzleBlocks[colorIndex].setStyle("-fx-text-inner-color: red;");
+        }
+
     }
+
+    private void GetColorPos(ArrayList<int[][]> stepsArray) {
+        int index = 0;
+        int[][] currentStep;
+
+        while (step != allSteps - 1) {
+            currentStep = stepsArray.get(step + 1);
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if (currentStep[i][j] == 0) {
+                        colorPos[step] = index;
+                    }
+                    index++;
+                }
+            }
+            index = 0;
+            step++;
+        }
+
+        System.out.println(colorPos);
+        step = 0;
+    }
+
 
     private int[][] getValues() {
         int[][] start = new int[size][size];

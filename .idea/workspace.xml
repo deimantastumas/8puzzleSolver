@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76207ede-8fa4-47d0-ab05-8c63d1b60cee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/State.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/guiInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/guiInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/8x8Puzzle/Solution/Solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/8x8Puzzle/Solution/Solver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/guiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/guiInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solution/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution/Solver.java" afterDir="false" />
     </list>
@@ -63,23 +55,23 @@
     <session id="-821761278">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2815" />
+          <entry key="java" value="3780" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2815" />
+          <entry key="JAVA" value="3780" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -134,7 +126,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="135">
               <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
             </state>
           </provider>
@@ -143,8 +135,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" selection-start-line="2" selection-end-line="55" />
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="49" />
               <folding>
                 <element signature="method#compareTo#0;class#State#0" />
               </folding>
@@ -152,11 +144,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Solution/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" selection-start-line="19" selection-end-line="24" selection-end-column="6" />
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-start-column="2" selection-end-line="24" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -164,13 +156,22 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game/guiInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="321" column="60" selection-start-line="321" selection-start-column="60" selection-end-line="321" selection-end-column="60" />
+            <state relative-caret-position="351">
+              <caret line="131" column="14" selection-start-line="131" selection-start-column="14" selection-end-line="131" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#DisplayAlert#0;class#guiInterface#0" />
+                <element signature="method#createButton#0;class#guiInterface#0" />
+                <element signature="method#AddFields#0;class#guiInterface#0" />
+                <element signature="method#CreateFields#0;class#guiInterface#0" />
+                <element signature="method#ClearGrid#0;class#guiInterface#0" />
+                <element signature="method#CheckIfSolvable#0;class#guiInterface#0" />
+                <element signature="method#CheckFormat#0;class#guiInterface#0" />
+                <element signature="method#CalculateOffsets#0;class#guiInterface#0" />
+                <element signature="method#CreateArray#0;class#guiInterface#0" />
               </folding>
             </state>
           </provider>
@@ -215,59 +216,52 @@
         <option value="$PROJECT_DIR$/src/Styles/style.css" />
         <option value="$PROJECT_DIR$/src/Styles/styles.css" />
         <option value="$PROJECT_DIR$/src/Game/State.java" />
-        <option value="$PROJECT_DIR$/src/Game/guiInterface.java" />
         <option value="$PROJECT_DIR$/src/Game/Board.java" />
         <option value="$PROJECT_DIR$/src/Solution/Solver.java" />
+        <option value="$PROJECT_DIR$/src/Game/guiInterface.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="917" />
-    <option name="y" value="68" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="777" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="8puzzleSolver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="8puzzleSolver" type="462c0819:PsiDirectoryNode" />
+              <item name="8x8Puzzle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="8x8Puzzle" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="8puzzleSolver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="8puzzleSolver" type="462c0819:PsiDirectoryNode" />
+              <item name="8x8Puzzle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="8x8Puzzle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="8puzzleSolver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="8puzzleSolver" type="462c0819:PsiDirectoryNode" />
+              <item name="8x8Puzzle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="8x8Puzzle" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="8puzzleSolver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="8puzzleSolver" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Solution" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Deimantas/Downloads/8x8Puzzle/src/Game/State.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544017295874" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544024664966" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -388,10 +382,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16791044" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17043619" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -400,13 +394,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4983845" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4696162" visible="true" weight="0.2451193" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4824094" weight="0.43492407" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.46607432" weight="0.24379562" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47980613" weight="0.43357664" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49919224" weight="0.32876712" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49919224" weight="0.32876712" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.53038377" side_tool="true" visible="true" weight="0.2451193" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5339257" side_tool="true" visible="true" weight="0.43357664" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49946696" weight="0.329718" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49840087" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -455,31 +449,13 @@
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/TextInputControl.java" />
     <entry file="file://$PROJECT_DIR$/src/Styles/style.css" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/javafx-src.zip!/javafx/scene/layout/GridPane.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/application/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="224" selection-start-line="224" selection-end-line="224" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="614" selection-start-line="614" selection-end-line="614" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/TextInputControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="347" column="35" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/application/Application.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Integer.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/TextInputControl.java" />
     <entry file="file://$PROJECT_DIR$/src/Game/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" selection-start-line="2" selection-end-line="55" />
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="49" />
           <folding>
             <element signature="method#compareTo#0;class#State#0" />
           </folding>
@@ -493,29 +469,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/guiInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="321" column="60" selection-start-line="321" selection-start-column="60" selection-end-line="321" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="135">
           <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Solution/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" selection-start-line="19" selection-end-line="24" selection-end-column="6" />
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-start-column="2" selection-end-line="24" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/guiInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="131" column="14" selection-start-line="131" selection-start-column="14" selection-end-line="131" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#DisplayAlert#0;class#guiInterface#0" />
+            <element signature="method#createButton#0;class#guiInterface#0" />
+            <element signature="method#AddFields#0;class#guiInterface#0" />
+            <element signature="method#CreateFields#0;class#guiInterface#0" />
+            <element signature="method#ClearGrid#0;class#guiInterface#0" />
+            <element signature="method#CheckIfSolvable#0;class#guiInterface#0" />
+            <element signature="method#CheckFormat#0;class#guiInterface#0" />
+            <element signature="method#CalculateOffsets#0;class#guiInterface#0" />
+            <element signature="method#CreateArray#0;class#guiInterface#0" />
           </folding>
         </state>
       </provider>
