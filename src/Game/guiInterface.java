@@ -13,20 +13,27 @@ import javafx.stage.Stage;
 import java.util.*;
 
 public class guiInterface extends Application {
+    //Fonts
     private final Font normalFont = new Font("Arial", 20);
     private final Font textFont = new Font("Arial", 55);
-    private final int size = Board.boardSize;
-    private TextField[] puzzleBlocks = new TextField[size * size];
-    private final int windowSize = 800;
-    private int step = 0;
-    private int allSteps = 0;
-    private int[] colorPos;
-    private ArrayList<int[][]> stepsArray = new ArrayList<>();
+
+    //Buttons
     private Button solve = createButton("Solve");
     private Button left = createButton("<-");
     private Button right = createButton("->");
     private Button reset = createButton("Reset");
     private Button generate = createButton("Random");
+
+    //Integers
+    private final int size = Board.boardSize;
+    private final int windowSize = 800;
+    private int step = 0;
+    private int allSteps = 0;
+    private int[] colorPos;
+
+    //Other
+    private TextField[] puzzleBlocks = new TextField[size * size];
+    private ArrayList<int[][]> stepsArray = new ArrayList<>();
     private GridPane grid = new GridPane();
 
     public static void main(String[] args) {
@@ -36,14 +43,11 @@ public class guiInterface extends Application {
     @Override
     public void start(Stage primaryStage) {
         CreateFields(puzzleBlocks);
-
+        Reset();
         BorderPane root = new BorderPane();
         root.getStyleClass().add("everything");
         root.setPrefSize(windowSize, windowSize);
         grid.setAlignment(Pos.CENTER);
-        StackPane test = new StackPane();
-
-        test.getChildren().add(grid);
         AddFields(puzzleBlocks);
 
         root.setCenter(grid);
@@ -72,7 +76,6 @@ public class guiInterface extends Application {
         scene.getStylesheets().add("Styles/styles.css");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        Reset();
         primaryStage.show();
     }
 
@@ -94,7 +97,6 @@ public class guiInterface extends Application {
 
             while (index != size * size) {
                 String rndNumber = rnd.nextInt(size * size) + "";
-                System.out.println(rndNumber);
                 if (!Arrays.asList(temp).contains(rndNumber)) {
                     if (rndNumber.equals("0")) {
                         numbers[index] = "";
@@ -158,10 +160,8 @@ public class guiInterface extends Application {
             boolean solvable = CheckIfSolvable(start);
             boolean correctFormat = CheckFormat(start);
 
-            System.out.println(correctFormat);
-
             if (correctFormat) {
-                if (solvable) {
+                if (true) {
                     DisableElements(true);
                     Solver solution = new Solver(start);
                     Stack<int[][]> steps = solution.states;
@@ -180,7 +180,7 @@ public class guiInterface extends Application {
                 }
             }
             else {
-                DisplayAlert("Error", "Your grid contains duplicating numbers!");
+                DisplayAlert("Error", "Incorrect format of the grid!");
                 ClearGrid();
             }
         });
@@ -207,7 +207,6 @@ public class guiInterface extends Application {
     private void DisableFields(boolean b) {
         for (int i = 0; i < puzzleBlocks.length; i++) {
             puzzleBlocks[i].setDisable(b);
-            puzzleBlocks[i].setStyle("-fx-color: blue;");
         }
     }
 
@@ -276,9 +275,7 @@ public class guiInterface extends Application {
 
     private boolean CheckIfSolvable(int[][] start) {
         int[] linearArray = CreateArray(start);
-
         int sum = CalculateOffsets(linearArray);
-        System.out.println(sum);
 
         if (sum % 2 == 0)
             return true;
@@ -369,8 +366,6 @@ public class guiInterface extends Application {
             index = 0;
             step++;
         }
-
-        System.out.println(colorPos);
         step = 0;
     }
 
@@ -382,7 +377,6 @@ public class guiInterface extends Application {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (!puzzleBlocks[index].getText().isEmpty()) {
-                    System.out.println(index + ": " + puzzleBlocks[index].getText().isEmpty());
                     start[i][j] = Integer.parseInt(puzzleBlocks[index++].getText());
                 }
                 else {
@@ -392,7 +386,6 @@ public class guiInterface extends Application {
 
             }
         }
-
         return start;
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="76207ede-8fa4-47d0-ab05-8c63d1b60cee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Game/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Board.java" afterDir="false" />
+    <list default="true" id="76207ede-8fa4-47d0-ab05-8c63d1b60cee" name="Default Changelist" comment="- elements functionality fixed (disabling unnecessary buttons, etc).">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/guiInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/8x8Puzzle/Game/guiInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/guiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/guiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solution/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution/Solver.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,22 +56,26 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="6" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3780" />
+          <entry key="css" value="20" />
+          <entry key="java" value="4271" />
+          <entry key="txt" value="97" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3780" />
+          <entry key="CSS" value="20" />
+          <entry key="JAVA" value="4271" />
+          <entry key="PLAIN_TEXT" value="97" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -135,8 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" selection-start-line="2" selection-end-line="49" />
+            <state relative-caret-position="-84">
+              <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
               <folding>
                 <element signature="method#compareTo#0;class#State#0" />
               </folding>
@@ -159,29 +163,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game/guiInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="131" column="14" selection-start-line="131" selection-start-column="14" selection-end-line="131" selection-end-column="14" />
+            <state relative-caret-position="179">
+              <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#DisplayAlert#0;class#guiInterface#0" />
-                <element signature="method#createButton#0;class#guiInterface#0" />
-                <element signature="method#AddFields#0;class#guiInterface#0" />
-                <element signature="method#CreateFields#0;class#guiInterface#0" />
-                <element signature="method#ClearGrid#0;class#guiInterface#0" />
-                <element signature="method#CheckIfSolvable#0;class#guiInterface#0" />
-                <element signature="method#CheckFormat#0;class#guiInterface#0" />
-                <element signature="method#CalculateOffsets#0;class#guiInterface#0" />
-                <element signature="method#CreateArray#0;class#guiInterface#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Styles/styles.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -199,6 +185,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>getBlank</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -214,16 +201,16 @@
         <option value="$PROJECT_DIR$/src/DataStructures/Test.java" />
         <option value="$PROJECT_DIR$/src/Game/ChartGrid.java" />
         <option value="$PROJECT_DIR$/src/Styles/style.css" />
-        <option value="$PROJECT_DIR$/src/Styles/styles.css" />
         <option value="$PROJECT_DIR$/src/Game/State.java" />
-        <option value="$PROJECT_DIR$/src/Game/Board.java" />
+        <option value="$PROJECT_DIR$/src/Styles/styles.css" />
         <option value="$PROJECT_DIR$/src/Solution/Solver.java" />
+        <option value="$PROJECT_DIR$/src/Game/Board.java" />
         <option value="$PROJECT_DIR$/src/Game/guiInterface.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="y" value="75" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
@@ -232,7 +219,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -257,11 +243,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Deimantas/Downloads/8x8Puzzle/src/Game/State.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544024664966" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544081343861" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -370,6 +357,21 @@
       <option name="presentableId" value="Default" />
       <updated>1543251378255</updated>
     </task>
+    <task id="LOCAL-00001" summary="- bug fixes">
+      <created>1544029424328</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1544029424328</updated>
+    </task>
+    <task id="LOCAL-00002" summary="- elements functionality fixed (disabling unnecessary buttons, etc).">
+      <created>1544079093212</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1544079093212</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -382,10 +384,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="0" y="75" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17043619" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17285945" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -394,13 +396,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4983845" weight="0.32876712" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.46607432" weight="0.24379562" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.46526656" visible="true" weight="0.24379562" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47980613" weight="0.43357664" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49919224" weight="0.32876712" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49919224" weight="0.32876712" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5339257" side_tool="true" visible="true" weight="0.43357664" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5347334" side_tool="true" visible="true" weight="0.24379562" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49946696" weight="0.329718" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49840087" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -425,6 +427,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- bug fixes" />
+    <MESSAGE value="- elements functionality fixed (disabling unnecessary buttons, etc)." />
+    <option name="LAST_COMMIT_MESSAGE" value="- elements functionality fixed (disabling unnecessary buttons, etc)." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -452,27 +459,20 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/application/Application.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Integer.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/TextInputControl.java" />
+    <entry file="file://$PROJECT_DIR$/src/Styles/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="49" />
+        <state relative-caret-position="-84">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
             <element signature="method#compareTo#0;class#State#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -486,21 +486,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/guiInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="131" column="14" selection-start-line="131" selection-start-column="14" selection-end-line="131" selection-end-column="14" />
+        <state relative-caret-position="179">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#DisplayAlert#0;class#guiInterface#0" />
-            <element signature="method#createButton#0;class#guiInterface#0" />
-            <element signature="method#AddFields#0;class#guiInterface#0" />
-            <element signature="method#CreateFields#0;class#guiInterface#0" />
-            <element signature="method#ClearGrid#0;class#guiInterface#0" />
-            <element signature="method#CheckIfSolvable#0;class#guiInterface#0" />
-            <element signature="method#CheckFormat#0;class#guiInterface#0" />
-            <element signature="method#CalculateOffsets#0;class#guiInterface#0" />
-            <element signature="method#CreateArray#0;class#guiInterface#0" />
           </folding>
         </state>
       </provider>
