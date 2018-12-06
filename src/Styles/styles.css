@@ -1,3 +1,7 @@
 .everything {
     -fx-padding: 35;
 }
+
+.text-field:disabled, .text-field:disabled > * {
+  -fx-opacity: 1.0 ;
+}

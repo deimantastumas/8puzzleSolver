@@ -22,6 +22,11 @@ public class guiInterface extends Application {
     private int allSteps = 0;
     private int[] colorPos;
     private ArrayList<int[][]> stepsArray = new ArrayList<>();
+    private Button solve = createButton("Solve");
+    private Button left = createButton("<-");
+    private Button right = createButton("->");
+    private Button reset = createButton("Reset");
+    private Button generate = createButton("Random");
     private GridPane grid = new GridPane();
 
     public static void main(String[] args) {
@@ -45,12 +50,6 @@ public class guiInterface extends Application {
         HBox bottomButtons = new HBox();
         HBox topButtons = new HBox();
 
-        Button solve = createButton("Solve");
-        Button left = createButton("<-");
-        Button right = createButton("->");
-        Button reset = createButton("Reset");
-        Button generate = createButton("Random");
-
         SetButtonActions(solve, left, right, reset, generate);
 
         bottomButtons.setSpacing(30);
@@ -73,6 +72,7 @@ public class guiInterface extends Application {
         scene.getStylesheets().add("Styles/styles.css");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
+        Reset();
         primaryStage.show();
     }
 
@@ -147,6 +147,7 @@ public class guiInterface extends Application {
         if (!stepsArray.isEmpty())
             stepsArray.clear();
         ClearGrid();
+        DisableElements(false);
     }
 
     private void SolveAction(Button solve) {
@@ -161,6 +162,7 @@ public class guiInterface extends Application {
 
             if (correctFormat) {
                 if (solvable) {
+                    DisableElements(true);
                     Solver solution = new Solver(start);
                     Stack<int[][]> steps = solution.states;
                     stepsArray = new ArrayList<>();
@@ -182,6 +184,31 @@ public class guiInterface extends Application {
                 ClearGrid();
             }
         });
+    }
+
+    private void DisableElements(boolean b) {
+        if (b) {
+            left.setDisable(false);
+            right.setDisable(false);
+            solve.setDisable(true);
+            generate.setDisable(true);
+            DisableFields(true);
+        }
+        else {
+            left.setDisable(true);
+            right.setDisable(true);
+            solve.setDisable(false);
+            generate.setDisable(false);
+            DisableFields(false);
+        }
+
+    }
+
+    private void DisableFields(boolean b) {
+        for (int i = 0; i < puzzleBlocks.length; i++) {
+            puzzleBlocks[i].setDisable(b);
+            puzzleBlocks[i].setStyle("-fx-color: blue;");
+        }
     }
 
     private void DisplayAlert(String title, String headerText) {
