@@ -15,7 +15,7 @@ import java.util.*;
 public class guiInterface extends Application {
     //Fonts
     private final Font normalFont = new Font("Arial", 20);
-    private final Font textFont = new Font("Arial", 55);
+    private final Font textFont = new Font("Arial", 30);
 
     //Buttons
     private Button solve = createButton("Solve");
@@ -161,7 +161,7 @@ public class guiInterface extends Application {
             boolean correctFormat = CheckFormat(start);
 
             if (correctFormat) {
-                if (true) {
+                if (solvable) {
                     DisableElements(true);
                     Solver solution = new Solver(start);
                     Stack<int[][]> steps = solution.states;
@@ -268,6 +268,7 @@ public class guiInterface extends Application {
         int index = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
+                puzzleBlocks[index].setStyle("-fx-text-inner-color: black;");
                 puzzleBlocks[index++].setText("");
             }
         }
@@ -276,10 +277,34 @@ public class guiInterface extends Application {
     private boolean CheckIfSolvable(int[][] start) {
         int[] linearArray = CreateArray(start);
         int sum = CalculateOffsets(linearArray);
+        boolean inversionOddity = (sum % 2 == 0);
 
-        if (sum % 2 == 0)
-            return true;
-        return false;
+        if (size % 2 == 0) {
+            return CheckIfSolvableEven(start, inversionOddity);
+        }
+        else {
+            return inversionOddity;
+        }
+    }
+
+    private boolean CheckIfSolvableEven(int[][] start, boolean inversionOddity) {
+        boolean blankPosOddity = findBlankOddity(start);
+
+        if (inversionOddity) {
+            return !blankPosOddity;
+        }
+        return blankPosOddity;
+    }
+
+    private boolean findBlankOddity(int[][] start) {
+        int row = 1;
+        for (int i = size - 1; i <= 0; i--) {
+            for (int j = 0; j < size; j++) {
+                if (start[i][j] == 0) { break; }
+            }
+            row++;
+        }
+        return row % 2 == 0;
     }
 
     private boolean CheckFormat(int[][] start) {

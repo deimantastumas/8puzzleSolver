@@ -7,7 +7,7 @@ public class Board {
     private Map<Integer, Vector> placement;
     public int[][] boardNumbers;
     private Vector<Integer> blankPos;
-    static public int boardSize = 3;
+    static public int boardSize = 4;
 
     public Board(int[][] tiles) {
         placement = new HashMap<>();
