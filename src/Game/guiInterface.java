@@ -1,6 +1,7 @@
 package Game;
 
 import Solution.Solver;
+import Solution.SolverArrayList;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

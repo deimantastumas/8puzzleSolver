@@ -44,8 +44,6 @@ public class Solver {
         State goalStage = new State(goal, null, 0);
         openSet.add(startStage);
 
-        Map<int[][], State> score = new HashMap<>();
-        score.put(start.boardNumbers, startStage);
         State previous;
 
         while (!openSet.isEmpty()) {
@@ -53,7 +51,6 @@ public class Solver {
             previous = current.getParent();
 
             if (current.equals(goalStage)) {
-                System.out.println(score.size());
                 Print(current);
                 break;
             }
@@ -69,15 +66,6 @@ public class Solver {
                 }
                 else
                     openSet.add(neighbor);
-
-                if (score.containsKey(neighbor.getBoardPosition().boardNumbers)) {
-                    UpdateScore(score, neighbor);
-                    openSet.remove(neighbor);
-                    openSet.add(neighbor);
-                }
-                else {
-                    score.put(neighbor.getBoardPosition().boardNumbers, neighbor);
-                }
             }
         }
     }
@@ -86,19 +74,8 @@ public class Solver {
         State letsGo = current;
         states = new Stack<>();
         while (letsGo != null) {
-//            letsGo.getBoardPosition().PrintBoard();
-//            System.out.println();
             states.add(letsGo.getBoardPosition().boardNumbers);
             letsGo = letsGo.getParent();
-        }
-    }
-
-    private void UpdateScore(Map<int[][], State> score, State neighbor) {
-        int[][] neighborNumbers = neighbor.getBoardPosition().boardNumbers;
-        int neighborScore = neighbor.getPriorityNumber();
-
-        if (score.get(neighborNumbers).getPriorityNumber() > neighborScore) {
-            score.put(neighborNumbers, neighbor);
         }
     }
 }
