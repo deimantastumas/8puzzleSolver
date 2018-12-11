@@ -1,13 +1,10 @@
 package Game;
 
 import Solution.Solver;
-import Solution.SolverArrayList;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -23,17 +20,22 @@ public class guiInterface extends Application {
     private Button left = createButton("<-");
     private Button right = createButton("->");
     private Button reset = createButton("Reset");
+    private Button options = createButton("Options");
     private Button generate = createButton("Random");
 
     //Integers
-    private final int size = Board.boardSize;
     private final int windowSize = 800;
     private int step = 0;
     private int allSteps = 0;
     private int[] colorPos;
+    private int size = 3;
+    private int[][] initialGrid = null;
+
+    //Strings
+    private String dataStructure = "priority_queue";
 
     //Other
-    private TextField[] puzzleBlocks = new TextField[size * size];
+    private TextField[] puzzleBlocks;
     private ArrayList<int[][]> stepsArray = new ArrayList<>();
     private GridPane grid = new GridPane();
 
@@ -43,19 +45,26 @@ public class guiInterface extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        CreateFields(puzzleBlocks);
-        Reset();
+
+        TextInputDialog dialog = new TextInputDialog("3");
+        dialog.setTitle("Grid size");
+        dialog.setContentText("Please enter the size of grid:");
+        Optional<String> sizeResult = dialog.showAndWait();
+        sizeResult.ifPresent(name -> size = Integer.parseInt(String.valueOf(name)));
+        CreateFields();
+        Reset(true);
+        initialGrid = new int[size][size];
         BorderPane root = new BorderPane();
         root.getStyleClass().add("everything");
         root.setPrefSize(windowSize, windowSize);
         grid.setAlignment(Pos.CENTER);
-        AddFields(puzzleBlocks);
+        AddFields();
 
         root.setCenter(grid);
         HBox bottomButtons = new HBox();
         HBox topButtons = new HBox();
 
-        SetButtonActions(solve, left, right, reset, generate);
+        SetButtonActions(solve, left, right, reset, generate, options);
 
         bottomButtons.setSpacing(30);
         topButtons.setSpacing(30);
@@ -67,6 +76,7 @@ public class guiInterface extends Application {
         bottomButtons.getChildren().add(right);
 
         topButtons.getChildren().add(reset);
+        topButtons.getChildren().add(options);
         topButtons.getChildren().add(generate);
 
         root.setBottom(bottomButtons);
@@ -80,17 +90,67 @@ public class guiInterface extends Application {
         primaryStage.show();
     }
 
-    private void SetButtonActions(Button solve, Button left, Button right, Button reset, Button generate) {
+    private void SetButtonActions(Button solve, Button left, Button right, Button reset, Button generate, Button options) {
         SolveAction(solve);
         ResetAction(reset);
         MoveLeftAction(left);
         MoveRightAction(right);
         GenerateAction(generate);
+        OptionsAction(options);
+    }
+
+    private void OptionsAction(Button options) {
+        options.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Options");
+            alert.setHeaderText("Programmed by: Deimantas Tumas");
+            alert.setContentText("Select your options...");
+            
+            ButtonType selectDataStructure = new ButtonType("Select structure");
+            ButtonType cancel = new ButtonType("Cancel");
+
+            alert.getButtonTypes().setAll(selectDataStructure, cancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == selectDataStructure) {
+                List<String> choices = new ArrayList<>();
+                choices.add("Array List");
+                choices.add("Priority Queue");
+                choices.add("Tree Set");
+
+                ChoiceDialog<String> dialog = new ChoiceDialog<>("Priority Queue", choices);
+                dialog.setTitle("Data structure selection");
+                dialog.setContentText("Select a data structure:");
+
+                Optional<String> structureResult = dialog.showAndWait();
+                structureResult.ifPresent(structure -> SetStructure(structure));
+            }
+            else {
+                alert.close();
+            }
+        });
+    }
+
+    private void SetStructure(String structure) {
+        switch (structure) {
+            case "Array List":
+                dataStructure = "array_list";
+                break;
+            case "Priority Queue":
+                dataStructure = "priority_queue";
+                break;
+            case "Tree Set":
+                dataStructure = "tree_set";
+                break;
+        }
+        FillInitialGrid();
+        Reset(false);
     }
 
     private void GenerateAction(Button generate) {
         generate.setOnAction(event -> {
-            Reset();
+            Reset(true);
             String[] numbers = new String[size * size];
             String[] temp = new String[size * size];
             Random rnd = new Random(System.currentTimeMillis());
@@ -141,50 +201,69 @@ public class guiInterface extends Application {
 
     private void ResetAction(Button reset) {
         reset.setOnAction(event -> {
-            Reset();
+            Reset(true);
         });
     }
 
-    private void Reset() {
+    private void Reset(boolean hardReset) {
         step = 0;
         if (!stepsArray.isEmpty())
             stepsArray.clear();
+        initialGrid = hardReset ? new int[size][size] : initialGrid;
         ClearGrid();
         DisableElements(false);
     }
 
     private void SolveAction(Button solve) {
         solve.setOnAction(event -> {
+            final long startTime = System.nanoTime();
             step = 0;
             stepsArray.clear();
             int[][] start = getValues();
-            boolean solvable = CheckIfSolvable(start);
+            Solver.setSize(size);
+            FillInitialGrid();
+            boolean solvable = Solver.CheckIfSolvable(start);
             boolean correctFormat = CheckFormat(start);
 
             if (correctFormat) {
                 if (solvable) {
                     DisableElements(true);
-                    Solver solution = new Solver(start);
+                    int[][] goal = setGoal();
+                    Solver solution = new Solver(start, dataStructure, goal);
+                    final long duration = System.nanoTime() - startTime;
                     Stack<int[][]> steps = solution.states;
                     stepsArray = new ArrayList<>();
                     while (!steps.empty()) {
                         stepsArray.add(steps.pop());
                     }
                     allSteps = stepsArray.size();
-                    DisplayAlert("Least amount of moves", String.valueOf(allSteps - 1));
+                    DisplayAlert("Efficiency", String.valueOf(duration / Math.pow(10,9)), allSteps - 1);
                     colorPos = new int[allSteps];
                     GetColorPos(stepsArray);
                     Display();
                 }
                 else {
-                    DisplayAlert("Error", "This puzzle is unsolvable!");
+                    DisplayAlert("Error", "This puzzle is unsolvable!", 0);
                 }
             }
             else {
-                DisplayAlert("Error", "Incorrect format of the grid!");
+                DisplayAlert("Error", "Incorrect format of the grid!", 0);
                 ClearGrid();
             }
         });
+    }
+
+    private int[][] setGoal() {
+        int[][] array = new int[size][size];
+        int number = 1;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                array[i][j] = number++;
+                if (number == size*size)
+                    number = 0;
+            }
+        }
+        return array;
     }
 
     private void DisableElements(boolean b) {
@@ -211,10 +290,17 @@ public class guiInterface extends Application {
         }
     }
 
-    private void DisplayAlert(String title, String headerText) {
+    private void DisplayAlert(String title, String headerText, int moves) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
-        alert.setHeaderText(headerText);
+        if (title.equals("Efficiency")) {
+            alert.setHeaderText("Data structure: " + dataStructure);
+            alert.setContentText(
+                    "Time spent: " + headerText + " seconds." + "\n" + "Visited nodes: " + Solver.nodeCount +
+                            "\n" + "Amount of moves: " + moves
+            );
+        }
+        else alert.setHeaderText(headerText);
         alert.showAndWait();
     }
 
@@ -229,7 +315,7 @@ public class guiInterface extends Application {
         return button;
     }
 
-    private void AddFields(TextField[] puzzleBlocks) {
+    private void AddFields() {
         int index = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -238,7 +324,20 @@ public class guiInterface extends Application {
         }
     }
 
-    private void CreateFields(TextField[] puzzleBlocks) {
+    private void FillInitialGrid() {
+        int value;
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                value = puzzleBlocks[index].getText().equals("") ? 0 : Integer.parseInt(puzzleBlocks[index].getText());
+                initialGrid[i][j] = value;
+                index++;
+            }
+        }
+    }
+
+    private void CreateFields() {
+        puzzleBlocks = new TextField[size * size];
         int index = 0;
         for (int i = 0; i < size * size; i++) {
             TextField temp = new TextField();
@@ -257,7 +356,6 @@ public class guiInterface extends Application {
                     else {
                         temp.setText("");
                     }
-
                 }
             });
 
@@ -267,49 +365,29 @@ public class guiInterface extends Application {
 
     private void ClearGrid() {
         int index = 0;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                puzzleBlocks[index].setStyle("-fx-text-inner-color: black;");
-                puzzleBlocks[index++].setText("");
+        if (initialGrid == null) {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    puzzleBlocks[index].setStyle("-fx-text-inner-color: black;");
+                    puzzleBlocks[index++].setText("");
+                }
             }
-        }
-    }
-
-    private boolean CheckIfSolvable(int[][] start) {
-        int[] linearArray = CreateArray(start);
-        int sum = CalculateOffsets(linearArray);
-        boolean inversionOddity = (sum % 2 == 0);
-
-        if (size % 2 == 0) {
-            return CheckIfSolvableEven(start, inversionOddity);
         }
         else {
-            return inversionOddity;
-        }
-    }
-
-    private boolean CheckIfSolvableEven(int[][] start, boolean inversionOddity) {
-        boolean blankPosOddity = findBlankOddity(start);
-
-        if (inversionOddity) {
-            return !blankPosOddity;
-        }
-        return blankPosOddity;
-    }
-
-    private boolean findBlankOddity(int[][] start) {
-        int row = 1;
-        for (int i = size - 1; i <= 0; i--) {
-            for (int j = 0; j < size; j++) {
-                if (start[i][j] == 0) { break; }
+            String value;
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    puzzleBlocks[index].setStyle("-fx-text-inner-color: black;");
+                    value = initialGrid[i][j] == 0 ? "" : String.valueOf(initialGrid[i][j]);
+                    puzzleBlocks[index++].setText(value);
+                }
             }
-            row++;
         }
-        return row % 2 == 0;
+
     }
 
     private boolean CheckFormat(int[][] start) {
-        int[] array = CreateArray(start);
+        int[] array = Solver.CreateArray(start);
         int index = 0;
 
         String[] tempArray = new String[size * size];
@@ -321,33 +399,6 @@ public class guiInterface extends Application {
                 return false;
         }
         return true;
-    }
-
-    private int CalculateOffsets(int[] linearArray) {
-        int sum = 0;
-        for (int i = 0; i < linearArray.length; i++) {
-            int current = linearArray[i];
-            for (int j = i; j < linearArray.length; j++) {
-                int followingNumber = linearArray[j];
-                if (followingNumber < current)
-                    sum++;
-            }
-        }
-        return sum;
-    }
-
-    private int[] CreateArray(int[][] start) {
-        int index = 0;
-        int[] linearArray = new int[size * size - 1];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                int number = start[i][j];
-                if (number != 0)
-                    linearArray[index++] = number;
-            }
-        }
-
-        return linearArray;
     }
 
     private void Display() {

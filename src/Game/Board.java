@@ -7,10 +7,11 @@ public class Board {
     private Map<Integer, Vector> placement;
     public int[][] boardNumbers;
     private Vector<Integer> blankPos;
-    static public int boardSize = 4;
+    private int boardSize;
 
-    public Board(int[][] tiles) {
+    public Board(int[][] tiles, int size) {
         placement = new HashMap<>();
+        boardSize = size;
         boardNumbers = new int[boardSize][boardSize];
         setValues(tiles);
         createDictionary();
@@ -48,28 +49,28 @@ public class Board {
 
         //Check up
         if (moveTile("Up")) {
-            Board up = new Board(boardNumbers);
+            Board up = new Board(boardNumbers, boardSize);
             AddElement(previousBoard, neighbors, up); // Add a board to the list if it's not equal to previous board
             moveTile("Down"); // Revert to starting position for further actions
         }
 
         //Check down
         if (moveTile("Down")) {
-            Board down = new Board(boardNumbers);
+            Board down = new Board(boardNumbers, boardSize);
             AddElement(previousBoard, neighbors, down); // Add a board to the list if it's not equal to previous board
             moveTile("Up"); // Revert to starting position for further actions
         }
 
         //Check left
         if (moveTile("Left")) {
-            Board left = new Board(boardNumbers);
+            Board left = new Board(boardNumbers, boardSize);
             AddElement(previousBoard, neighbors, left); // Add a board to the list if it's not equal to previous board
             moveTile("Right"); // Revert to starting position for further actions
         }
 
         //Check right
         if (moveTile("Right")) {
-            Board right = new Board(boardNumbers);
+            Board right = new Board(boardNumbers, boardSize);
             AddElement(previousBoard, neighbors, right); // Add a board to the list if it's not equal to previous board
             moveTile("Left"); // Revert to starting position for further actions
         }
