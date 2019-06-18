@@ -1,5 +1,5 @@
 # 8puzzleSolver
-Duomenų struktūrų moduliui sukurta programa skirta žymaus galvosūkio "8 puzzle" sprendimo radimui.
+Duomenų struktūrų moduliui sukurta programa skirta galvosūkio "8 puzzle" sprendimo radimui.
 
 Vartotojas gali pasirinkti lentos dydį bei langelių skaičių reikšmes. Programa interaktyviai parodys trumpiausią galvosūkio sprendimą. 
 
